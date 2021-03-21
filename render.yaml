@@ -1,0 +1,10 @@
+services:
+- type: web
+  name: jamstack demo
+  env: static
+  buildCommand: npm run generate
+  staticPublishPath: ./dist
+  pullRequestPreviewsEnabled: true
+  domains:
+  - render.jamstackdeploy.com
+
