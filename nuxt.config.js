@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'jamstack-demo-app',
+    title: 'Jamstack Demo App for jamstackdeploy.com',
     htmlAttrs: {
       lang: 'en'
     },
