@@ -1,0 +1,22 @@
+name: AWS S3 + CloudFront Deploy
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout current branch
+        uses: actions/checkout@v1
+      - name: Install npm dependencies
+        run: npm i
+      - name: Build application
+        run: npm run build
+      - name: Move new files to S3 and invalidate cloud front distribution cache
+        run: ./.github/scripts/deploy.sh ase
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.ASE_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.ASE_AWS_SECRET_ACCESS_KEY }}
+          MASTER_ASE_AWS_CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.MASTER_ASE_AWS_CLOUDFRONT_DISTRIBUTION_ID }}
+          DEVELOP_ASE_AWS_CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.DEVELOP_ASE_AWS_CLOUDFRONT_DISTRIBUTION_ID }}
