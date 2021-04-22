@@ -3,14 +3,23 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
     "build": "nuxt generate",
-    "start": "nuxt start",
-    "generate": "nuxt generate"
+    "dev": "nuxt",
+    "deploy:firebase": "firebase deploy --only hosting",
+    "deploy:github": "push-dir --dir=dist --branch=gh-pages --cleanup --force",
+    "deploy:netlify": "netlify deploy --dir dist --prod",
+    "deploy:surge": "surge dist surge.jamstackdeploy.com",
+    "deploy:vercel": "vercel --prod",
+    "generate": "nuxt generate",
+    "predeploy:github": "npm run generate && cp github.CNAME dist/CNAME",
+    "predeploy:netlify": "npm run build",
+    "start": "nuxt start"
   },
   "dependencies": {
     "core-js": "^3.8.3",
     "nuxt": "^2.14.12"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "push-dir": "^0.4.1"
+  }
 }
